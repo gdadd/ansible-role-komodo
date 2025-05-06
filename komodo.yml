@@ -1,0 +1,5 @@
+---
+- name: Manage Komodo Service
+  hosts: komodo
+  roles:
+      - role: bpbradley.komodo
