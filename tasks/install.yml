@@ -1,6 +1,7 @@
 ---
 
 - name: Ensure ACL package exists when creating a new user
+  become: true
   ansible.builtin.apt:
     name: acl
     state: present
