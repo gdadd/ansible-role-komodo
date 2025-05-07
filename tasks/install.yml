@@ -1,11 +1,10 @@
 ---
 
-- name: Ensure ACL package exists when creating a new user this one time
-#  become: true
+- name: Ensure ACL package exists when creating a new user
+  become: true
   ansible.builtin.apt:
     name: acl
     state: present
-#    become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user exists here
@@ -18,6 +17,7 @@
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure necessary directories
+  become: true
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
