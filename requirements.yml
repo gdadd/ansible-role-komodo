@@ -1,6 +1,6 @@
 ---
 roles:
-  - name: bpbradley.komodo
+  - name: gdadd.komodo
     src: https://github.com/gdadd/ansible-role-komodo
     scm: git
     version: main  # or specify a tag/commit if needed
