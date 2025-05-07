@@ -2,4 +2,4 @@
 - name: Manage Komodo Service
   hosts: docker
   roles:
-      - role: bpbradley.komodo
+      - role: gdadd.komodo
