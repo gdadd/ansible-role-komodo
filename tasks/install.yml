@@ -4,7 +4,7 @@
   ansible.builtin.apt:
     name: acl
     state: present
-  become: true
+  # become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user exists
@@ -34,7 +34,7 @@
     owner: "{{ komodo_user }}"
     group: "{{ komodo_group }}"
     mode: "0750"
-  become: true
+  # become: true
   when: ssl_enabled | default(true)
 
 - name: Add Komodo user to the docker group
