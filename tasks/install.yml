@@ -8,7 +8,7 @@
     become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
-- name: Ensure Komodo user exists
+- name: Ensure Komodo user exists here
   become: true
   ansible.builtin.user:
     name: "{{ komodo_user }}"
