@@ -11,6 +11,8 @@
   ansible.builtin.user:
     name: "{{ komodo_user }}"
     become: true
+    become_user: ansible
+    become_method: sudo
     shell: /usr/sbin/nologin
     create_home: true
     home: "{{ komodo_home }}"
