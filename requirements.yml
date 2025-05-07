@@ -1,2 +1,3 @@
-#  roles:
- #     - role: bpbradley.komodo
+- src: https://github.com/gdadd/ansible-role-komodo
+  name: bpbradley.komodo
+  version: main  # or a specific tag/branch
