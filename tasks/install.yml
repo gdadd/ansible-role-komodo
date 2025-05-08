@@ -15,7 +15,7 @@
     create_home: true
     home: "{{ komodo_home }}"
   become: true
-  become_user: ansible
+  #become_user: ansible
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user is in the docker group
