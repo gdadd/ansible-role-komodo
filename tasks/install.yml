@@ -48,6 +48,7 @@
     append: true
 
 - name: Enable lingering for Komodo user
+  become: true
   ansible.builtin.command: loginctl enable-linger {{ komodo_user }}
   changed_when: false
 
