@@ -9,6 +9,8 @@
   changed_when: false
 
 - name: Disable lingering for komodo user
+  become: true
+  become_user: "{{ komodo_user }}"
   ansible.builtin.command: loginctl disable-linger {{ komodo_user }}
   changed_when: false
   when: komodo_delete_user | default(false)
@@ -23,6 +25,7 @@
     - "{{ komodo_service_dir }}"
     - "/etc/komodo/ssl"
   become: true
+  become_user: "{{ komodo_user }}"
 
 - name: Disable and remove periphery service
   ansible.builtin.shell: |
