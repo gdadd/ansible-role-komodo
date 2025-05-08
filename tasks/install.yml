@@ -77,6 +77,8 @@
     force: true
 
 - name: Deploy configuration file
+  become: true
+  become_user: "{{ komodo_user }}"
   ansible.builtin.template:
     src: periphery.config.toml.j2
     dest: "{{ komodo_config_path }}"
@@ -85,6 +87,8 @@
     group: "{{ komodo_group }}"
 
 - name: Deploy systemd user service file
+  become: true
+  become_user: "{{ komodo_user }}"
   ansible.builtin.template:
     src: periphery.service.j2
     dest: "{{ komodo_service_path }}"
