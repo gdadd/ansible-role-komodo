@@ -66,6 +66,8 @@
   when: ansible_architecture not in ['x86_64', 'aarch64']
 
 - name: Download Komodo Periphery Agent
+  become: true
+  become_user: "{{ komodo_user }}"
   ansible.builtin.get_url:
     url: "https://github.com/moghtech/komodo/releases/download/{{ komodo_version }}/{{ binary_name }}"
     dest: "{{ komodo_bin_path }}"
