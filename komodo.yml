@@ -3,5 +3,3 @@
   hosts: docker
   roles:
       - role: gdadd.komodo
-        komodo_action: "install"
-        passkey: iHjBUXokkJS0bxKoaL5budqYUm1usa
