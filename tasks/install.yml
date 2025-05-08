@@ -13,7 +13,7 @@
     shell: /bin/bash  # allow become_user to work
     create_home: true
     home: "{{ komodo_home }}"
-  #become: true
+    become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user is in the docker group
