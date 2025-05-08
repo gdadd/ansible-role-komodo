@@ -117,9 +117,3 @@
   become: true
   become_user: "{{ komodo_user }}"
   changed_when: false
-  
-- name: Set shell back to /usr/sbin/nologin
-  become: true
-  ansible.builtin.user:
-    name: "{{ komodo_user }}"
-    shell: /usr/sbin/nologin
