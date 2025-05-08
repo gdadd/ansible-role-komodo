@@ -41,6 +41,7 @@
   when: ssl_enabled | default(true)
 
 - name: Add Komodo user to the docker group
+  become: true
   ansible.builtin.user:
     name: "{{ komodo_user }}"
     groups: docker
