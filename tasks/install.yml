@@ -4,7 +4,7 @@
   ansible.builtin.apt:
     name: acl
     state: present
-  #become: true
+  become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user exists with temporary login shell
@@ -13,7 +13,7 @@
     shell: /bin/bash  # allow become_user to work
     create_home: true
     home: "{{ komodo_home }}"
-  #become: true
+  become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
 
 - name: Ensure Komodo user is in the docker group
@@ -21,11 +21,11 @@
     name: "{{ komodo_user }}"
     groups: docker
     append: true
-  #become: true
+  become: true
 
 - name: Enable lingering for Komodo user
   ansible.builtin.command: loginctl enable-linger {{ komodo_user }}
-  #become: true
+  become: true
   changed_when: false
 
 - name: Ensure necessary directories exist
@@ -39,7 +39,7 @@
     - "{{ komodo_bin_dir }}"
     - "{{ komodo_config_dir }}"
     - "{{ komodo_service_dir }}"
-  #become: true
+  become: true
 
 - name: Ensure SSL directory exists
   ansible.builtin.file:
@@ -48,7 +48,7 @@
     owner: "{{ komodo_user }}"
     group: "{{ komodo_group }}"
     mode: "0750"
-  #become: true
+  become: true
   when: ssl_enabled | default(true)
 
 - name: Fail if unsupported architecture
@@ -64,7 +64,7 @@
     owner: "{{ komodo_user }}"
     group: "{{ komodo_group }}"
     force: true
-  #become: true
+  become: true
 
 - name: Deploy Komodo config file
   ansible.builtin.template:
@@ -73,7 +73,7 @@
     mode: "0640"
     owner: "{{ komodo_user }}"
     group: "{{ komodo_group }}"
-  #become: true
+  become: true
 
 - name: Deploy systemd user service file
   ansible.builtin.template:
@@ -82,7 +82,7 @@
     mode: "0644"
     owner: "{{ komodo_user }}"
     group: "{{ komodo_group }}"
-  #become: true
+  become: true
 
 - name: Reload user systemd
   ansible.builtin.shell: |
@@ -113,5 +113,5 @@
   ansible.builtin.user:
     name: "{{ komodo_user }}"
     shell: /usr/sbin/nologin
-  #become: true
+  become: true
   when: komodo_user_exists is not defined or not komodo_user_exists
