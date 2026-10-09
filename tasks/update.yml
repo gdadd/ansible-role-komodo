@@ -23,6 +23,7 @@
     group: "{{ komodo_group }}"
     mode: "0750"
   become: true
+  become_user: root
   with_items:
     - "{{ komodo_bin_dir }}"
     - "{{ komodo_config_dir }}"
