@@ -52,6 +52,16 @@
   become: true
   when: ssl_enabled | default(true)
 
+- name: Ensure Periphery v2 key directory exists
+  ansible.builtin.file:
+    path: /etc/komodo/keys
+    state: directory
+    owner: "{{ komodo_user }}"
+    group: "{{ komodo_group }}"
+    mode: "0700"
+  become: true
+  become_user: root
+
 - name: Fail if unsupported architecture
   ansible.builtin.fail:
     msg: "Unsupported architecture: {{ ansible_architecture }}. Supported architectures are x86_64 and aarch64."
