@@ -15,27 +15,6 @@
   become: true
   when: komodo_bin_path is defined
   
-- name: Show configured privilege escalation variables
-  ansible.builtin.debug:
-    msg:
-      - "ansible_user={{ ansible_user | default('undefined') }}"
-      - "ansible_become_user={{ ansible_become_user | default('undefined') }}"
-      - "ansible_become={{ ansible_become | default('undefined') }}"
-  tags: always
-
-- name: Verify actual effective user
-  ansible.builtin.command: id
-  become: true
-  become_user: root
-  register: effective_identity
-  changed_when: false
-  tags: always
-
-- name: Display actual effective user
-  ansible.builtin.debug:
-    var: effective_identity.stdout
-  tags: always
-  
 - name: Ensure necessary directories
   ansible.builtin.file:
     path: "{{ item }}"
@@ -100,6 +79,16 @@
   become: true
   become_user: "{{ komodo_user }}"
   changed_when: false
+
+- name: Ensure Periphery v2 key directory exists
+  ansible.builtin.file:
+    path: /etc/komodo/keys
+    state: directory
+    owner: "{{ komodo_user }}"
+    group: "{{ komodo_group }}"
+    mode: "0700"
+  become: true
+  become_user: root
 
 - name: Restart periphery service after update
   ansible.builtin.shell: |
